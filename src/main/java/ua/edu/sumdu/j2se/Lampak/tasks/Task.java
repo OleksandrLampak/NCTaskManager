@@ -66,6 +66,7 @@ public class Task {
 
     boolean isRepeated() {
         return repeated;
+        //some comment
     }
 
 }
