@@ -89,4 +89,15 @@ public class Task {
         return repeated;
     }
 
+    int nextTimeAfter(int current) {
+        int nextTime = startTime;
+        while (nextTime > current) {
+            nextTime += interval;
+        }
+        if (nextTime > endTime)
+            return -1;
+        else
+            return nextTime;
+    }
+
 }
