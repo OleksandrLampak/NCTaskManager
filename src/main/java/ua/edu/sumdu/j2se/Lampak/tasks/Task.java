@@ -90,14 +90,26 @@ public class Task {
     }
 
     public int nextTimeAfter(int current) {
-        int nextTime = startTime;
-        while (nextTime >= current) {
-            nextTime += interval;
-        }
-        if (nextTime > endTime)
+        if (!active)
             return -1;
-        else
-            return nextTime;
+        else {
+            if (!repeated)
+                if (time > current)
+                    return time;
+                else
+                    return -1;
+            else {
+                int nextTime = startTime;
+
+                while (nextTime <= current) {
+                    nextTime += interval;
+                }
+                if (nextTime > endTime)
+                    return -1;
+                else
+                    return nextTime;
+            }
+        }
     }
-//comment
+
 }
