@@ -27,57 +27,57 @@ public class Task {
 
     }
 
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    boolean isActive() {
+    public boolean isActive() {
         return active;
     }
 
-    void setActive(boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
-    int getTime() {
+    public int getTime() {
         if (repeated)
             return startTime;
         else
             return time;
     }
 
-    void setTime(int time) {
+    public void setTime(int time) {
         this.time = time;
         if (repeated)
             this.repeated = false;
     }
 
-    int getStartTime() {
+    public int getStartTime() {
         if (repeated)
             return startTime;
         else
             return time;
     }
 
-    int getEndTime() {
+    public int getEndTime() {
         if (repeated)
             return endTime;
         else
             return time;
     }
 
-    int getRepeatInterval() {
+    public int getRepeatInterval() {
         if (repeated)
             return interval;
         else
             return 0;
     }
 
-    void setTime(int start, int end, int interval) {
+    public void setTime(int start, int end, int interval) {
         this.startTime = start;
         this.endTime = end;
         this.interval = interval;
@@ -85,13 +85,13 @@ public class Task {
             this.repeated = true;
     }
 
-    boolean isRepeated() {
+    public boolean isRepeated() {
         return repeated;
     }
 
-    int nextTimeAfter(int current) {
+    public int nextTimeAfter(int current) {
         int nextTime = startTime;
-        while (nextTime > current) {
+        while (nextTime >= current) {
             nextTime += interval;
         }
         if (nextTime > endTime)
@@ -99,5 +99,5 @@ public class Task {
         else
             return nextTime;
     }
-
+//comment
 }
