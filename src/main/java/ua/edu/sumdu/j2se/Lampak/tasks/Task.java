@@ -1,23 +1,61 @@
 package ua.edu.sumdu.j2se.Lampak.tasks;
 
+import ua.edu.sumdu.j2se.Lampak.tasks.exceptions.TaskException;
+
 public class Task {
 
-    public String title;
-    public boolean active;
-    public boolean repeated;
-    public int time;
-    public int startTime;
-    public int endTime;
-    public int interval;
+    private String title;
+    private boolean active;
+    private boolean repeated;
+    private int time;
+    private int startTime;
+    private int endTime;
+    private int interval;
 
-    public Task(String title, int time) {
+    public Task(String title, int time) throws TaskException {
+        if (title =="") {
+            try {
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                throw new TaskException("Program fault, incorrect 'title': is empty" + title, e);
+            }
+        }
+
+        if (time < 0) {
+            try {
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                throw new TaskException("Program fault, incorrect 'time': " + time, e);
+            }
+        }
         this.title = title;
         this.time = time;
         this.active = false;
         this.repeated = false;
     }
 
-    public Task(String title, int start, int end, int interval) {
+    public Task(String title, int start, int end, int interval) throws TaskException {
+        if (start < 0) {
+            try {
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                throw new TaskException("Program fault, incorrect 'start': " + start, e);
+            }
+        }
+        if (end < 0) {
+            try {
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                throw new TaskException("Program fault, incorrect 'end': " + end, e);
+            }
+        }
+        if (interval < 0) {
+            try {
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                throw new TaskException("Program fault, incorrect 'interval': " + interval, e);
+            }
+        }
         this.title = title;
         this.startTime = start;
         this.endTime = end;
@@ -31,7 +69,14 @@ public class Task {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title) throws TaskException {
+        if (title =="") {
+            try {
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                throw new TaskException("Program fault, incorrect 'title': is empty" + title, e);
+            }
+        }
         this.title = title;
     }
 
@@ -39,7 +84,15 @@ public class Task {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(boolean active) throws TaskException {
+        if (active !=(true || false)) {
+            try {
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                throw new TaskException("Program fault, incorrect 'active'(is not boolean): " + active, e);
+            }
+        }
+        this.title = title;
         this.active = active;
     }
 
@@ -50,7 +103,13 @@ public class Task {
             return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(int time) throws TaskException {
+        if (time < 0) {
+            try {
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                throw new TaskException("Program fault, incorrect 'time': " + time, e);
+            }
         this.time = time;
         if (repeated)
             this.repeated = false;

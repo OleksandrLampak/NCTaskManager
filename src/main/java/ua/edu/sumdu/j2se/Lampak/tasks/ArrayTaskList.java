@@ -31,13 +31,13 @@ public class ArrayTaskList {
         ArrayTaskList listToReturn = new ArrayTaskList();
         for (int i = 0; i < arrayTaskList.size(); i++) {
             Task task = (Task) arrayTaskList.get(i);
-            if (task.active) {
-                if (!task.repeated) {
-                    if (task.time > from) {
+            if (task.isActive()) {
+                if (!task.isRepeated()) {
+                    if (task.getTime() > from) {
                         listToReturn.add(task);
                     }
                 } else {
-                    if (task.startTime > from && task.endTime < to) {
+                    if (task.getStartTime() > from && task.getEndTime() < to) {
                         listToReturn.add(task);
                     }
                 }
