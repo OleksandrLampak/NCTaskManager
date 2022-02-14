@@ -13,11 +13,11 @@ public class Task {
     private int interval;
 
     public Task(String title, int time) throws TaskException {
-        if (title =="") {
+        if (title.isBlank()) {
             try {
                 throw new IllegalArgumentException();
             } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect 'title': is empty" + title, e);
+                throw new TaskException("Program fault, incorrect 'title': is empty", e);
             }
         }
 
@@ -70,11 +70,11 @@ public class Task {
     }
 
     public void setTitle(String title) throws TaskException {
-        if (title =="") {
+        if (title.isBlank()) {
             try {
                 throw new IllegalArgumentException();
             } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect 'title': is empty" + title, e);
+                throw new TaskException("Program fault, incorrect 'title': is empty", e);
             }
         }
         this.title = title;
@@ -84,15 +84,7 @@ public class Task {
         return active;
     }
 
-    public void setActive(boolean active) throws TaskException {
-        if (active !=(true || false)) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect 'active'(is not boolean): " + active, e);
-            }
-        }
-        this.title = title;
+    public void setActive(boolean active) {
         this.active = active;
     }
 
@@ -110,64 +102,65 @@ public class Task {
             } catch (IllegalArgumentException e) {
                 throw new TaskException("Program fault, incorrect 'time': " + time, e);
             }
+        }
         this.time = time;
         if (repeated)
             this.repeated = false;
     }
 
-    public int getStartTime() {
-        if (repeated)
-            return startTime;
-        else
-            return time;
-    }
+    public int getStartTime () {
+            if (repeated)
+                return startTime;
+            else
+                return time;
+        }
 
-    public int getEndTime() {
-        if (repeated)
-            return endTime;
-        else
-            return time;
-    }
+        public int getEndTime () {
+            if (repeated)
+                return endTime;
+            else
+                return time;
+        }
 
-    public int getRepeatInterval() {
-        if (repeated)
-            return interval;
-        else
-            return 0;
-    }
+        public int getRepeatInterval () {
+            if (repeated)
+                return interval;
+            else
+                return 0;
+        }
 
-    public void setTime(int start, int end, int interval) {
-        this.startTime = start;
-        this.endTime = end;
-        this.interval = interval;
-        if (!repeated)
-            this.repeated = true;
-    }
-
-    public boolean isRepeated() {
-        return repeated;
-    }
-
-    public int nextTimeAfter(int current) {
-        if (!active)
-            return -1;
-        else {
+        public void setTime ( int start, int end, int interval){
+            this.startTime = start;
+            this.endTime = end;
+            this.interval = interval;
             if (!repeated)
-                if (time > current)
-                    return time;
-                else
-                    return -1;
-            else {
-                int nextTime = startTime;
+                this.repeated = true;
+        }
 
-                while (nextTime <= current) {
-                    nextTime += interval;
+        public boolean isRepeated () {
+            return repeated;
+        }
+
+        public int nextTimeAfter ( int current){
+            if (!active)
+                return -1;
+            else {
+                if (!repeated)
+                    if (time > current)
+                        return time;
+                    else
+                        return -1;
+                else {
+                    int nextTime = startTime;
+
+                    while (nextTime <= current) {
+                        nextTime += interval;
+                    }
+                    if (nextTime > endTime)
+                        return -1;
+                    else
+                        return nextTime;
                 }
-                if (nextTime > endTime)
-                    return -1;
-                else
-                    return nextTime;
             }
         }
     }
-}
