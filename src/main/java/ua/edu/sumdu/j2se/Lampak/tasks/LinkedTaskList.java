@@ -1,6 +1,6 @@
 package ua.edu.sumdu.j2se.Lampak.tasks;
 
-public class ArrayTaskList {
+public class LinkedTaskList {
 
     private Task[] arrayTask = new Task[10];
     private int size = 0;
@@ -51,8 +51,8 @@ public class ArrayTaskList {
         return arrayTask[index];
     }
 
-    public ArrayTaskList incoming(int from, int to) {
-        ArrayTaskList listToReturn = new ArrayTaskList();
+    public LinkedTaskList incoming(int from, int to) {
+        LinkedTaskList listToReturn = new LinkedTaskList();
         for (int i = 0; i < size; i++) {
             Task task = arrayTask[i];
             if (task.isActive()) {

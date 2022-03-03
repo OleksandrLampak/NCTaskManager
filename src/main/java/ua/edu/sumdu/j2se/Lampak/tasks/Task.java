@@ -25,7 +25,7 @@ public class Task {
             try {
                 throw new IllegalArgumentException();
             } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect 'time': " + time, e);
+                throw new TaskException("Program fault, incorrect time: " + time, e);
             }
         }
         this.title = title;
