@@ -1,44 +1,62 @@
 package ua.edu.sumdu.j2se.Lampak.tasks;
 
-public class LinkedTaskList {
+public class LinkedTaskList extends AbstractTaskList {
 
-    private Task[] arrayTask = new Task[10];
-    private int size = 0;
+    private Node first;
+    private Node last;
+    private int size;
+
+    static class Node {
+        Task task;
+        Node next;
+
+        Node(Task task) {
+            this.task = task;
+            this.next = null;
+        }
+    }
 
     public void add(Task task) {
-        if (arrayTask[arrayTask.length - 1] != null) {
-            Task[] newArray = new Task[arrayTask.length * 2];
-            int i;
-            for (i = 0; i < arrayTask.length; i++) {
-                newArray[i] = arrayTask[i];
-            }
-            newArray[i + 1] = task;
-            arrayTask = newArray;
+        Node newNode = new Node(task);
+        if (first == null) {
+            first = last = newNode;
         } else {
-            for (int i = 0; i < arrayTask.length; i++)
-                if (arrayTask[i] == null) {
-                    arrayTask[i] = task;
-                    break;
-                }
+            last.next = newNode;
+            last = newNode;
         }
         size++;
     }
 
     public boolean remove(Task task) {
         boolean boolToReturn = false;
-        int indexForNull = 0;
-        for (int i = 0; i < arrayTask.length; i++) {
-            if (arrayTask[i] == task) {
-                boolToReturn = true;
-                indexForNull = i;
-                break;
+        if (size != 0) {
+            Node current = first;
+            Node prev = null;
+            while (current != null) {
+                if (task == current.task) {
+                    if (current == first) {
+                        current = first.next;
+                        first = first.next;
+                        if (first == null) {
+                            last = null;
+                        }
+                        current = null;
+                    } else if (current == last) {
+                        last = prev;
+                        last.next = null;
+                        current = null;
+                    } else {
+                        prev.next = current.next;
+                        current = current.next;
+                        current = null;
+                    }
+                    boolToReturn = true;
+                    size--;
+                } else {
+                    prev = current;
+                    current = current.next;
+                }
             }
-        }
-        if (boolToReturn) {
-            for (int i = indexForNull+1; i < arrayTask.length; i++) {
-                arrayTask[i-1] = arrayTask[i];
-            }
-            size--;
         }
         return boolToReturn;
     }
@@ -48,25 +66,36 @@ public class LinkedTaskList {
     }
 
     public Task getTask(int index) {
-        return arrayTask[index];
+        Node current = first;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current.task;
     }
 
     public LinkedTaskList incoming(int from, int to) {
         LinkedTaskList listToReturn = new LinkedTaskList();
+        Node current = first;
         for (int i = 0; i < size; i++) {
-            Task task = arrayTask[i];
-            if (task.isActive()) {
-                if (!task.isRepeated()) {
-                    if (task.getTime() > from) {
-                        listToReturn.add(task);
+            if (current.task.isActive()) {
+                if (!current.task.isRepeated()) {
+                    if (current.task.getTime() > from) {
+                        listToReturn.add(current.task);
                     }
                 } else {
-                    if (task.getStartTime() > from & task.getEndTime() < to) {
-                        listToReturn.add(task);
+                    if (current.task.getStartTime() > from & current.task.getEndTime() < to) {
+                        listToReturn.add(current.task);
                     }
                 }
             }
+            current = current.next;
         }
         return listToReturn;
     }
 }
+
+
+
+
+
+

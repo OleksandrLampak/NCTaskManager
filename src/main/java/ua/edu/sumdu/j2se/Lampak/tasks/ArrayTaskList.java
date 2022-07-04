@@ -1,6 +1,10 @@
 package ua.edu.sumdu.j2se.Lampak.tasks;
 
-public class ArrayTaskList {
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Iterator;
+
+public class ArrayTaskList extends AbstractTaskList {
 
     private Task[] arrayTask = new Task[10];
     private int size = 0;
@@ -69,4 +73,27 @@ public class ArrayTaskList {
         }
         return listToReturn;
     }
+
+    @NotNull
+    @Override
+    public Iterator<Task> iterator() {
+        return new Iterator<Task>() {
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public Task next() {
+                return null;
+            }2+1+
+        };
+    }
 }
+
+
+
+
+
+
+

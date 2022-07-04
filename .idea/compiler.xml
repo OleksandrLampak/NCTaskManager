@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="NCTaskManager" target="1.11" />
+      <module name="NCTaskManager" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

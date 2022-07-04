@@ -14,19 +14,11 @@ public class Task {
 
     public Task(String title, int time) throws TaskException {
         if (title.isBlank()) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect 'title': is empty", e);
-            }
+            throw new TaskException("Incorrect 'title': is empty");
         }
 
         if (time < 0) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect time: " + time, e);
-            }
+            throw new IllegalArgumentException("Incorrect time: " + time);
         }
         this.title = title;
         this.time = time;
@@ -36,25 +28,15 @@ public class Task {
 
     public Task(String title, int start, int end, int interval) throws TaskException {
         if (start < 0) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect 'start': " + start, e);
-            }
+            throw new TaskException("Program fault, incorrect 'start': " + start);
+
         }
         if (end < 0) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect 'end': " + end, e);
-            }
+            throw new TaskException("Program fault, incorrect 'end': " + end);
         }
         if (interval < 0) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect 'interval': " + interval, e);
-            }
+            throw new TaskException("Program fault, incorrect 'interval': " + interval);
+
         }
         this.title = title;
         this.startTime = start;
@@ -71,11 +53,8 @@ public class Task {
 
     public void setTitle(String title) throws TaskException {
         if (title.isBlank()) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect 'title': is empty", e);
-            }
+            throw new TaskException("Program fault, incorrect 'title': is empty");
+
         }
         this.title = title;
     }
@@ -97,11 +76,7 @@ public class Task {
 
     public void setTime(int time) throws TaskException {
         if (time < 0) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                throw new TaskException("Program fault, incorrect 'time': " + time, e);
-            }
+            throw new TaskException("Program fault, incorrect 'time': " + time);
         }
         this.time = time;
         if (repeated)
